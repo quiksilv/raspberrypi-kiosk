@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Prototype
+Comment=Prototype
+Exec=python /home/mlwong/Projects/RaspberryPi/prototype/main.py
+Icon=
+Terminal=false
+Type=Application
+Encoding=UTF-8
+Categories=Application;

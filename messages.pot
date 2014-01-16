@@ -1,0 +1,105 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2013-12-25 10:59+BNT\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: ENCODING\n"
+"Generated-By: pygettext.py 1.5\n"
+
+
+#: main.py:54 main.py:275
+msgid "Local connection error"
+msgstr ""
+
+#: main.py:78
+msgid "Timeout"
+msgstr ""
+
+#: main.py:93
+msgid "Please wait, sending request to server..."
+msgstr ""
+
+#: main.py:104
+msgid "Please insert {selected_product_value}. You have inserted {total}."
+msgstr ""
+
+#: main.py:137 main.py:188
+msgid "Back"
+msgstr ""
+
+#: main.py:139 main.py:211
+msgid "Clear"
+msgstr ""
+
+#: main.py:141 main.py:190
+msgid "Recipient Number"
+msgstr ""
+
+#: main.py:145 main.py:192
+msgid "Ok"
+msgstr ""
+
+#: main.py:170
+msgid "Chinese"
+msgstr ""
+
+#: main.py:171
+msgid "Bengali"
+msgstr ""
+
+#: main.py:172
+msgid "Tagalog"
+msgstr ""
+
+#: main.py:173
+msgid "Indonesian"
+msgstr ""
+
+#: main.py:174
+msgid "English"
+msgstr ""
+
+#: main.py:270
+msgid "Please wait, querying server..."
+msgstr ""
+
+#: main.py:285
+msgid "Aborted"
+msgstr ""
+
+#: main.py:299
+msgid "Please insert exact amount..."
+msgstr ""
+
+#: main.py:317
+msgid "Done"
+msgstr ""
+
+#: main.py:330
+msgid "Operator: "
+msgstr ""
+
+#: main.py:331
+msgid "Recipient Number: "
+msgstr ""
+
+#: main.py:332
+msgid "Product Sent: "
+msgstr ""
+
+#: main.py:333
+msgid "You paid: "
+msgstr ""
+
+#: main.py:383
+msgid "Abort"
+msgstr ""
+

@@ -1,0 +1,105 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Prototype 1\n"
+"POT-Creation-Date: 2013-12-23 22:15+BNT\n"
+"PO-Revision-Date: 2014-01-07 16:37+0800\n"
+"Last-Translator: Mark <mark@squarepotato.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+"X-Generator: Poedit 1.5.4\n"
+
+#: main.py:51 main.py:248
+msgid "Local connection error"
+msgstr "Local connection error"
+
+#: main.py:75
+msgid "Timeout"
+msgstr "Timeout"
+
+#: main.py:90
+msgid "Please wait, sending request to server..."
+msgstr "Sandali lang, pinapadala ang request sa server ..."
+
+#: main.py:104
+msgid "Please insert {selected_product_value}. You have inserted {total}."
+msgstr ""
+"Mangyaring magpasok ng {selected_product_value}. Ikaw ay nagpasok ng {total}."
+
+#: main.py:146
+msgid "Bengali"
+msgstr "Bengali"
+
+#: main.py:147
+msgid "Tagalog"
+msgstr "Tagalog"
+
+#: main.py:148
+msgid "Indonesian"
+msgstr "Indonesian"
+
+#: main.py:149
+msgid "English"
+msgstr "English"
+
+#: main.py:161
+msgid "Back"
+msgstr "Balik"
+
+#: main.py:163
+msgid "Recipient Number"
+msgstr "Numero ng Recipient"
+
+#: main.py:165
+msgid "Ok"
+msgstr "Ok"
+
+#: main.py:189
+msgid "Clear"
+msgstr "Clear"
+
+#: main.py:199
+msgid "Welcome"
+msgstr "Welcome"
+
+#: main.py:243
+msgid "Please wait, querying server..."
+msgstr "Sandali lang, kinakausap ang server ..."
+
+#: main.py:258
+msgid "Aborted"
+msgstr "Aborted"
+
+#: main.py:266 main.py:355
+msgid "Abort"
+msgstr "Abort"
+
+#: main.py:272
+msgid "Please insert exact amount..."
+msgstr "Mangyaring ipasok ang eksaktong halaga ..."
+
+#: main.py:290 main.py:379
+msgid "Done"
+msgstr "Done"
+
+#: main.py:302
+msgid "Operator: "
+msgstr "Operator:"
+
+#: main.py:303
+msgid "Recipient Number: "
+msgstr "Numero ng Recipient:"
+
+#: main.py:304
+msgid "Product Sent: "
+msgstr "Produkto Ipinadala:"
+
+#: main.py:305
+msgid "You paid: "
+msgstr "Nagbayad ka:"
