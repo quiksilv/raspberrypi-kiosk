@@ -3,36 +3,28 @@ import os, requests, logging
 class Datasource:
 
 	def __init__(self):
-		self.url = "http://localhost:8080"
-		#self.login = os.environ['BITCOIN_LOGIN']
-		#self.token = os.environ['BITCOIN_PASSWORD']
-		self.login = 'testuser'
-		self.token = 'testpassword'
-	def get_price(self):
+		self.url = "http://localhost:8080/"
+	def authenticate(self):
+		url = self.url + "oauth/authorize"
 		data = {
-			'action': 'query_price',
-			'dummy_variable' : 1,
-			'signature' : 'ASDRGH112321312',
-			'login': self.login,
-			'token': self.token
+			'application_id' : 'APPLICATION_ID',
+			'secret_key' : 'SECRET_KEY'
 		}
-		r = self.post(data)
+		response = requests.get(url, data)
+		return response.json()
+	def action(self, action, data):
+		url = self.url + "api/" + action
+		r = self.get(url, data)
 		return r.json()
-	def buy_bitcoin(self):
-		data = {
-			'action':'buy',
-			'dummy_variable' : 1,
-			'signature' : 'ASDRGH112321312',
-			'login': self.login,
-			'token': self.token,
-			'amount': 5,
+	def get(self, url, data):
+		headers = {
+			'Accept': 'application/bitcoin.atm.v1',
+			'Authorization': 'Bearer ' + self.token
 		}
-		r = self.post(data)
-		return r.json()
-	def post(self, data):
-		url = self.url
-		try :
-			response = requests.post(url, data)
+		try:
+			response = requests.get(url, data, headers)
 		except requests.ConnectionError:
 			response = []
 		return response
+	def test(self):
+		return requests.get("http://localhost:8080/status.php").json()
