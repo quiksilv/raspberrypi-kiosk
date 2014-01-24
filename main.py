@@ -231,7 +231,7 @@ class Main(wx.Frame):
 		self.vbox.Add(self.hbox_content, proportion=1)
 
 		advertisement = wx.BoxSizer(wx.HORIZONTAL)
-		advertisement.Add(wx.StaticBitmap(self.pnl, -1, wx.Image(self.absolute_path + "/images/deploy_SquarePotato1_web.png", wx.BITMAP_TYPE_ANY).ConvertToBitmap() ) );
+		advertisement.Add(wx.StaticBitmap(self.pnl, -1, wx.Image(self.absolute_path + "/images/deploy_SquarePotato1_web.png", wx.BITMAP_TYPE_ANY).ConvertToBitmap() ) )
 		self.vbox.Add(advertisement, flag=wx.EXPAND | wx.ALL, border = 20)
 		self.pnl.SetSizer(self.vbox)
 	def ClearProductBox(self, event):

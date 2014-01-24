@@ -3,7 +3,7 @@
 	<object class="wxFrame" name="mainFrame">
 		<title>Bitcoin ATM</title>
 		<object class="wxPanel" name="scanPanel">
-			<object class="wxBoxSizer" name="scanVerticalBox">
+			<object class="wxBoxSizer">
 			<orient>wxVERTICAL</orient>
 				<object class="sizeritem">
 					<object class="wxStaticText" name="current_price_label">
@@ -68,7 +68,7 @@
 				</object>
 				<object class="sizeritem">
 					<object class="wxStaticBitmap" name="qr_code_image">
-						<bitmap></bitmap>
+					<size>100</size>
 					</object>
 					<flag>wxALIGN_CENTER</flag>
 				</object>
