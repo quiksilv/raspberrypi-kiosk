@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resource>
 	<object class="wxFrame" name="mainFrame">
-		<size>600, 480</size>
+		<size>640, 350</size>
 		<title>Bitcoin ATM</title>
 		<object class="wxPanel">
 			<object class="wxBoxSizer" name="mainSizer">
