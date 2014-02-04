@@ -18,9 +18,11 @@ class BitcoinATM(wx.App):
 		self.frame = self.res.LoadFrame(None, 'mainFrame')
 		self.scanPanel = xrc.XRCCTRL(self.frame, 'scanPanel')
 		self.insertPanel = xrc.XRCCTRL(self.frame, 'insertPanel')
-		self.insertPanel.Hide()
+		self.insertPanel.GetParent().GetSizer().Hide(self.insertPanel)
+		self.insertPanel.GetParent().GetSizer().Layout()
 		self.boughtPanel = xrc.XRCCTRL(self.frame, 'boughtPanel')
-		self.boughtPanel.Hide()
+		self.boughtPanel.GetParent().GetSizer().Hide(self.boughtPanel)
+		self.boughtPanel.GetParent().GetSizer().Layout()
 		self.price_label = xrc.XRCCTRL(self.scanPanel, 'price_label')
 		self.identity_textbox = xrc.XRCCTRL(self.scanPanel, 'identity')
 		self.identity_textbox.SetFocus()
@@ -35,15 +37,24 @@ class BitcoinATM(wx.App):
 		DataWorker(self)
 		self.frame.Show()
 	def OnScanned(self, event):
-		self.scanPanel.Hide()
-		self.insertPanel.Show()
+		self.scanPanel.GetParent().GetSizer().Hide(self.scanPanel)
+		self.scanPanel.GetParent().GetSizer().Layout()
+		self.insertPanel.GetParent().GetSizer().Show(self.insertPanel)
+		self.insertPanel.GetParent().GetSizer().Layout()
 		# send authorization request to bitcoin api
 		#
 		#
-		self.acceptor = Acceptor(self)
+		try:
+			self.acceptor = Acceptor(self)
+		except IOError as e:
+			print e
+		except:
+			raise
 	def OnBuy(self, event):
-		self.insertPanel.Hide()
-		self.boughtPanel.Show()
+		self.insertPanel.GetParent().GetSizer().Hide(self.insertPanel)
+		self.insertPanel.GetParent().GetSizer().Layout()
+		self.boughtPanel.GetParent().GetSizer().Show(self.boughtPanel)
+		self.boughtPanel.GetParent().GetSizer().Layout()
 		self.acceptor.abort()
 		# send request to bitcoin api and get bitcoin private key
 		#
@@ -53,6 +64,10 @@ class BitcoinATM(wx.App):
 	def OnAgain(self, event):
 		self.boughtPanel.Hide()
 		self.scanPanel.Show()
+		self.boughtPanel.GetParent().GetSizer().Hide(self.boughtPanel)
+		self.scanPanel.GetParent().GetSizer().Layout()
+		self.scanPanelPanel.GetParent().GetSizer().Show(self.scanPanel)
+		self.boughtPanel.GetParent().GetSizer().Layout()
 	def CreateQR(self, string):
 		qr = QRCode(version=1, box_size=3, border=1)
 		qr.add_data(string)
