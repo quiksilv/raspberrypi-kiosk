@@ -6,38 +6,40 @@
 		<object class="wxPanel">
 			<object class="wxBoxSizer" name="mainSizer">
 				<orient>wxVERTICAL</orient>
-				<emptyCellSize>(0,0)</emptyCellSize>
 				<object class="sizeritem">
-					<flag>wxEXPAND</flag>
+					<flag>wxALIGN_CENTER|wxEXPAND</flag>
 					<object class="wxPanel" name="scanPanel">
 						<object class="wxBoxSizer">
 							<orient>wxVERTICAL</orient>
 							<object class="sizeritem">
+								<flag>wxALIGN_CENTER_HORIZONTAL</flag>
 								<object class="wxStaticText" name="current_price_label">
 									<label>Insert cash</label>
 								</object>
-								<flag>wxALIGN_CENTER|wxEXPAND</flag>
 							</object>
 							<object class="sizeritem">
+								<flag>wxALIGN_CENTER_HORIZONTAL</flag>
 								<object class="wxStaticText" name="price_label">
 									<label>N.A.</label>
 								</object>
-								<flag>wxEXPAND</flag>
 							</object>
 							<object class="sizeritem">
+								<flag>wxALIGN_CENTER_HORIZONTAL</flag>
 								<object class="wxStaticText" name="identity_label">
 									<label>Scan to continue</label>
 								</object>
-								<flag>wxEXPAND</flag>
 							</object>
 							<object class="sizeritem">
+								<border>10</border>
+								<flag>wxALL | wxEXPAND</flag>
 								<object class="wxTextCtrl" name="identity"/>
 							</object>
 							<object class="sizeritem">
+								<border>10</border>
+								<flag>wxALL | wxEXPAND</flag>
 								<object class="wxButton" name="next">
 									<label>Next</label>
 								</object>
-								<flag>wxEXPAND</flag>
 							</object>
 						</object>
 					</object>
@@ -48,22 +50,23 @@
 						<object class="wxBoxSizer">
 							<orient>wxVERTICAL</orient>
 							<object class="sizeritem">
+								<flag>wxALIGN_CENTER_HORIZONTAL</flag>
 								 <object class="wxStaticText" name="insert_cash_label">
 									 <label>Insert cash</label>
 								 </object>
-								 <flag>wxEXPAND</flag>
 							</object>
 							<object class="sizeritem">
+								<flag>wxALIGN_CENTER_HORIZONTAL</flag>
 								<object class="wxStaticText" name="amount_inserted_label">
 									<label>0</label>
 								</object>
-								<flag>wxEXPAND</flag>
 							</object>
 							<object class="sizeritem">
+								<border>10</border>
+								<flag>wxALL | wxEXPAND</flag>
 								<object class="wxButton" name="buy">
 									<label>Buy</label>
 								</object>
-								<flag>wxEXPAND</flag>
 							</object>
 						</object>
 					</object>
@@ -74,22 +77,23 @@
 						<object class="wxBoxSizer">
 							<orient>wxVERTICAL</orient>
 							<object class="sizeritem">
+								<flag>wxALIGN_CENTER_HORIZONTAL</flag>
 								 <object class="wxStaticText" name="insert_cash_label">
 									 <label>Thank you</label>
 								 </object>
-								 <flag>wxEXPAND</flag>
 							</object>
 							<object class="sizeritem">
+								<flag>wxALIGN_CENTER_HORIZONTAL</flag>
 								<object class="wxStaticBitmap" name="qr_code_image">
-								<size>100</size>
+									<size>100</size>
 								</object>
-								<flag>wxEXPAND</flag>
 							</object>
 							<object class="sizeritem">
+								<border>10</border>
+								<flag>wxALL | wxEXPAND</flag>
 								<object class="wxButton" name="again">
 									<label>Again</label>
 								</object>
-								<flag>wxEXPAND</flag>
 							</object>
 						</object>
 					</object>

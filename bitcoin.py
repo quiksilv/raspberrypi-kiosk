@@ -55,15 +55,16 @@ class BitcoinATM(wx.App):
 		self.insertPanel.GetParent().GetSizer().Layout()
 		self.boughtPanel.GetParent().GetSizer().Show(self.boughtPanel)
 		self.boughtPanel.GetParent().GetSizer().Layout()
-		self.acceptor.abort()
+		try:
+			self.acceptor.abort()
+		except AttributeError as e:
+			print e
 		# send request to bitcoin api and get bitcoin private key
 		#
 		#
 		self.CreateQR("E9873D79C6D87DC0FB6A5778633389F4453213303DA61F20BD67FC233AA33262")
 		self.amount_inserted_label.SetLabel("")
 	def OnAgain(self, event):
-		self.boughtPanel.Hide()
-		self.scanPanel.Show()
 		self.boughtPanel.GetParent().GetSizer().Hide(self.boughtPanel)
 		self.scanPanel.GetParent().GetSizer().Layout()
 		self.scanPanelPanel.GetParent().GetSizer().Show(self.scanPanel)
