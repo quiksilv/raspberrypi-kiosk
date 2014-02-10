@@ -62,12 +62,15 @@ class BitcoinATM(wx.App):
 		# send request to bitcoin api and get bitcoin private key
 		#
 		#
-		self.CreateQR("E9873D79C6D87DC0FB6A5778633389F4453213303DA61F20BD67FC233AA33262")
+		amount = self.amount_inserted_label.GetLabel()
+		d = Datasource()
+		result = d.action("exchange", {'amount': amount} )
+		self.CreateQR(result['wif'])
 		self.amount_inserted_label.SetLabel("")
 	def OnAgain(self, event):
 		self.boughtPanel.GetParent().GetSizer().Hide(self.boughtPanel)
 		self.scanPanel.GetParent().GetSizer().Layout()
-		self.scanPanelPanel.GetParent().GetSizer().Show(self.scanPanel)
+		self.scanPanel.GetParent().GetSizer().Show(self.scanPanel)
 		self.boughtPanel.GetParent().GetSizer().Layout()
 	def CreateQR(self, string):
 		qr = QRCode(version=1, box_size=3, border=1)
@@ -99,7 +102,7 @@ class DataWorker(Thread):
 		self.start()
 	def run(self):
 		while True:
-			result = self.d.test()
+			result = self.d.action("exchange_rate", {})
 			wx.PostEvent(self._main_window, ResultEvent(GET_EXCHANGE_RATE_ID, result) )
 			time.sleep(1)
 class Acceptor(Thread):
