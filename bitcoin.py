@@ -8,11 +8,14 @@ from BillAcceptor import BillAcceptor
 q = Queue.Queue()
 GET_EXCHANGE_RATE_ID = wx.NewId()
 GET_INSERTED_AMOUNT_ID = wx.NewId()
+GET_STATUS_ID = wx.NewId()
 class BitcoinATM(wx.App):
 
 	def OnInit(self):
 		self.res = xrc.XmlResource('gui.xrc')
 		self.init_frame()
+		self.d = Datasource()
+		self.d.token()
 		return True
 	def init_frame(self):
 		self.frame = self.res.LoadFrame(None, 'mainFrame')
@@ -23,6 +26,13 @@ class BitcoinATM(wx.App):
 		self.boughtPanel = xrc.XRCCTRL(self.frame, 'boughtPanel')
 		self.boughtPanel.GetParent().GetSizer().Hide(self.boughtPanel)
 		self.boughtPanel.GetParent().GetSizer().Layout()
+
+		self.next_btn = xrc.XRCCTRL(self.scanPanel, 'next');
+		self.buy_btn = xrc.XRCCTRL(self.insertPanel, 'buy');
+		self.again_btn = xrc.XRCCTRL(self.boughtPanel, 'again');
+
+		self.service_status_label = xrc.XRCCTRL(self.scanPanel, 'service_status_label');
+		self.alert_bar = xrc.XRCCTRL(self.insertPanel, 'alert_bar')
 		self.price_label = xrc.XRCCTRL(self.scanPanel, 'price_label')
 		self.identity_textbox = xrc.XRCCTRL(self.scanPanel, 'identity')
 		self.identity_textbox.SetFocus()
@@ -34,6 +44,8 @@ class BitcoinATM(wx.App):
 		self.frame.Bind(wx.EVT_BUTTON, self.OnAgain, id=xrc.XRCID('again') )
 		self.Connect(-1, -1, GET_EXCHANGE_RATE_ID, self.GetExchangeRate)
 		self.Connect(-1, -1, GET_INSERTED_AMOUNT_ID, self.GetInsertedAmount)
+		self.Connect(-1, -1, GET_STATUS_ID, self.GetServiceStatus)
+		StatusWorker(self)
 		DataWorker(self)
 		self.frame.Show()
 	def OnScanned(self, event):
@@ -41,9 +53,6 @@ class BitcoinATM(wx.App):
 		self.scanPanel.GetParent().GetSizer().Layout()
 		self.insertPanel.GetParent().GetSizer().Show(self.insertPanel)
 		self.insertPanel.GetParent().GetSizer().Layout()
-		# send authorization request to bitcoin api
-		#
-		#
 		try:
 			self.acceptor = Acceptor(self)
 		except IOError as e:
@@ -51,22 +60,24 @@ class BitcoinATM(wx.App):
 		except:
 			raise
 	def OnBuy(self, event):
-		self.insertPanel.GetParent().GetSizer().Hide(self.insertPanel)
-		self.insertPanel.GetParent().GetSizer().Layout()
-		self.boughtPanel.GetParent().GetSizer().Show(self.boughtPanel)
-		self.boughtPanel.GetParent().GetSizer().Layout()
 		try:
 			self.acceptor.abort()
 		except AttributeError as e:
 			print e
 		# send request to bitcoin api and get bitcoin private key
 		#
-		#
 		amount = self.amount_inserted_label.GetLabel()
-		d = Datasource()
-		result = d.action("exchange", {'amount': amount} )
-		self.CreateQR(result['wif'])
-		self.amount_inserted_label.SetLabel("")
+		result = self.d.action("exchange", {'amount': amount} )
+		if(result['meta']['code'] != 200):
+			self.alert_bar.SetLabel(result['meta']['status'])
+			self.alert_bar.SetForegroundColour("red");
+		else:
+			self.CreateQR(result['wif'])
+			self.insertPanel.GetParent().GetSizer().Hide(self.insertPanel)
+			self.insertPanel.GetParent().GetSizer().Layout()
+			self.boughtPanel.GetParent().GetSizer().Show(self.boughtPanel)
+			self.boughtPanel.GetParent().GetSizer().Layout()
+			self.amount_inserted_label.SetLabel("")
 	def OnAgain(self, event):
 		self.boughtPanel.GetParent().GetSizer().Hide(self.boughtPanel)
 		self.scanPanel.GetParent().GetSizer().Layout()
@@ -86,7 +97,13 @@ class BitcoinATM(wx.App):
 		self.price_label.SetLabel(str(event.data['exchange_rate']) )
 	def GetInsertedAmount(self, event):
 		self.amount_inserted_label.SetLabel(str(event.data) )
-
+	def GetServiceStatus(self, event):
+		self.service_status_label.SetLabel("Status: " + str(event.data['meta']['status']) )
+		if(event.data['meta']['code'] != 200):
+			self.next_btn.Disable()
+			self.buy_btn.Disable()
+			self.again_btn.Disable()
+		
 class ResultEvent(wx.PyEvent):
 	"""Simple event to carry arbitrary result data."""
 	def __init__(self, event_id, data):
@@ -94,11 +111,24 @@ class ResultEvent(wx.PyEvent):
 		wx.PyEvent.__init__(self)
 		self.SetEventType(event_id)
 		self.data = data
+class StatusWorker(Thread):
+	def __init__(self, main_window):
+		Thread.__init__(self)
+		self._main_window = main_window
+		self.d = Datasource()
+		self.d.token()
+		self.start()
+	def run(self):
+		while True:
+			result = self.d.action("status", {})
+			wx.PostEvent(self._main_window, ResultEvent(GET_STATUS_ID, result) )
+			time.sleep(1)
 class DataWorker(Thread):
 	def __init__(self, main_window):
 		Thread.__init__(self)
 		self._main_window = main_window
 		self.d = Datasource()
+		self.d.token()
 		self.start()
 	def run(self):
 		while True:
